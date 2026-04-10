@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #c8f04a;
+  --color-secondary: #0c0e14;
+}
+@layer components {
+  .btn-primary {
+    /* On utilise la variable définie au-dessus plutôt que le code HEX */
+    @apply bg-primary text-black font-bold py-2 px-4 rounded;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white font-bold py-2 px-4 rounded hover:bg-gray-700 hover:shadow-3xl transition duration-300;
+  }
+}
+.principal {
+  background-color: #c8f04a;
+}
+
+.second {
+  background-color: #0c0e14;
+}
