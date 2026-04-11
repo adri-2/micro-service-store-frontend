@@ -39,23 +39,15 @@ function OrderList() {
               <tbody className="divide-y divide-gray-700 bg-white/5  ">
                 {orders.map((order) => (
                   <tr
-                    className="hover:bg-gray-800 transition-colors bg-secondary border-b border-primary"
+                    className="hover:bg-gray-800 transition-colors bg-secondary border-b border-primary text-white"
                     key={order.id}
                   >
-                    <td className="px-6 py-4 text-primary">{order.id}</td>
-                    <td className="px-6 py-4 text-primary">
-                      {order.created_at}
-                    </td>
-                    <td className="px-6 py-4 text-primary">
-                      {order.customer_name}
-                    </td>
-                    <td className="px-6 py-4 text-primary">
-                      {order.total_amount}
-                    </td>
-                    <td className="px-6 py-4 text-primary">
-                      {order.user_name}
-                    </td>
-                    <td className="px-6 py-4 text-primary">{order.status}</td>
+                    <td className="px-6 py-4 text-white">{order.id}</td>
+                    <td className="px-6 py-4 ">{order.created_at}</td>
+                    <td className="px-6 py-4 ">{order.customer_name}</td>
+                    <td className="px-6 py-4 ">{order.total_amount}</td>
+                    <td className="px-6 py-4 ">{order.user_name}</td>
+                    <td className="px-6 py-4 ">{order.status}</td>
                   </tr>
                 ))}
               </tbody>

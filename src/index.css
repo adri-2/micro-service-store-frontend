@@ -7,17 +7,10 @@
 @layer components {
   .btn-primary {
     /* On utilise la variable définie au-dessus plutôt que le code HEX */
-    @apply bg-primary text-black font-bold py-2 px-4 rounded;
+    @apply bg-primary text-black font-bold py-2 px-4 rounded cursor-pointer hover:bg-green-500 hover:shadow-2xl transition duration-300;
   }
 
   .btn-secondary {
-    @apply bg-secondary text-white font-bold py-2 px-4 rounded hover:bg-gray-700 hover:shadow-3xl transition duration-300;
+    @apply bg-secondary text-white font-bold py-2 px-4 rounded cursor-pointer hover:bg-gray-700 hover:shadow-2xl transition duration-300;
   }
-}
-.principal {
-  background-color: #c8f04a;
-}
-
-.second {
-  background-color: #0c0e14;
 }

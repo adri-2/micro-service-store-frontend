@@ -5,7 +5,7 @@ import { useAuthStore } from "../store/authStore";
 export function useAuth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { setUser, setTokens, clearAuth } = useAuthStore();
+  const { setUser, setTokens, clearAuth, refreshToken } = useAuthStore();
 
   const login = async (email, password) => {
     setLoading(true);
@@ -24,7 +24,9 @@ export function useAuth() {
     }
   };
   const logout = async () => {
-    await accountService.logout().catch(() => {});
+    if (refreshToken) {
+      await accountService.logout({ refresh: refreshToken }).catch(() => {});
+    }
     clearAuth();
   };
   return { login, logout, loading, error };
