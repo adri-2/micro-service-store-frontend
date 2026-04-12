@@ -2,7 +2,8 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { LogOut } from "lucide-react";
-function NavBar() {
+
+function NavBar({ linkTo }) {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -17,9 +18,9 @@ function NavBar() {
         ? "text-white border-b-2 border-white"
         : "text-secondary hover:text-white"
     }`;
-
+  const link = linkTo || "#";
   return (
-    <div className="flex items-center justify-between  px-8 py-2 bg-primary shadow-xl h-24capitalize">
+    <div className="flex items-center justify-between  px-8 py-2 bg-primary shadow-xl h-24 capitalize">
       <div className="flex flex-col">
         {/* Navigation */}
         <nav className="flex gap-6  text-[17px] ">
@@ -44,7 +45,11 @@ function NavBar() {
           </NavLink>
         </nav>
         <div className="mt-4">
-          <button className="btn-secondary">Nouveau</button>
+          {/* <button > */}
+          <NavLink className="btn-secondary" to={`${link.toString()}`}>
+            Nouveau
+          </NavLink>
+          {/* </button> */}
         </div>
       </div>
 

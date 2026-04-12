@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { orderService } from "../api/orderService";
 import NavBar from "../components/NavBar";
+import OrderStatus from "../components/layouts/OrderStatus";
 function OrderList() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ function OrderList() {
       <div className="flex flex-col">
         {/* menu */}
         {/*  */}
-        <NavBar />
+        <NavBar linkTo={"/orders/new"} />
         {/* liste */}
         <section className="w-full ">
           <div className="overflow-x-auto  border border-gray-700">
@@ -44,10 +45,12 @@ function OrderList() {
                   >
                     <td className="px-6 py-4 text-white">{order.id}</td>
                     <td className="px-6 py-4 ">{order.created_at}</td>
-                    <td className="px-6 py-4 ">{order.customer_name}</td>
+                    <td className="px-6 py-4 ">{order.client_name}</td>
                     <td className="px-6 py-4 ">{order.total_amount}</td>
                     <td className="px-6 py-4 ">{order.user_name}</td>
-                    <td className="px-6 py-4 ">{order.status}</td>
+                    <td className="px-6 py-4 ">
+                      <OrderStatus status={order.status} variant="solid" />
+                    </td>
                   </tr>
                 ))}
               </tbody>

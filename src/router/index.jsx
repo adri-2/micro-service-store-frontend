@@ -4,6 +4,7 @@ import CategoriesPage from "../pages/CategoriesPage";
 import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "../components/PrivateRoute";
 import ProductsPage from "../pages/ProductsPage";
+import OrderCreater from "../pages/OrderCreater";
 
 export default function AppRouter() {
   return (
@@ -14,6 +15,14 @@ export default function AppRouter() {
         element={
           <PrivateRoute>
             <OrderList />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/orders/new"
+        element={
+          <PrivateRoute>
+            <OrderCreater />
           </PrivateRoute>
         }
       />
