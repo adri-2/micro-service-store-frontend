@@ -6,9 +6,18 @@ const api = axios.create({
 });
 //
 api.interceptors.request.use((config) => {
-  const { accessToken } = getTokens();
-  if (accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+  // Skip adding token for auth endpoints (login, register, refresh)
+  const url = config.url || "";
+  const isAuthEndpoint =
+    url.includes("/auth/login/") ||
+    url.includes("/auth/register/") ||
+    url.includes("/auth/refresh/");
+
+  if (!isAuthEndpoint) {
+    const { accessToken } = getTokens();
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
   }
   return config;
 });

@@ -87,6 +87,25 @@ function OrderCreater() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!(formData.user_id || currentUser?.id)) {
+      alert("Utilisateur introuvable, reconnecte-toi.");
+      return;
+    }
+
+    if (!formData.client_id) {
+      alert("Choisis un client avant de créer la commande.");
+      return;
+    }
+
+    if (
+      formData.items.some(
+        (item) => !item.product_id || Number(item.quantity) <= 0,
+      )
+    ) {
+      alert("Chaque ligne doit avoir un produit et une quantité valide.");
+      return;
+    }
+
     try {
       await orderService.create({
         user_id: formData.user_id || currentUser?.id,
@@ -100,7 +119,12 @@ function OrderCreater() {
       alert("Commande créée !");
     } catch (err) {
       console.error(err);
-      alert("Erreur création");
+      const errorData = err?.response?.data;
+      const details =
+        typeof errorData === "string"
+          ? errorData
+          : JSON.stringify(errorData || { detail: "Erreur création" });
+      alert(`Erreur création: ${details}`);
     }
   };
 
