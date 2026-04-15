@@ -1,44 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { orderService } from "../api/orderService";
-import OrderStatus from "../components/layouts/OrderStatus";
+import { productService } from "../api/categorieService";
 import { formatCurrency, formatDate } from "../utils/format";
-function OrderList() {
-  const [orders, setOrders] = useState([]);
+
+function ProductsList() {
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    orderService
+    productService
       .getAll()
-      .then((res) => setOrders(res.data))
+      .then((res) => setProducts(res.data))
       .catch(() => setError("Erreur de chargement"))
       .finally(() => setLoading(false));
   }, []);
+  console.log("//", products);
 
-  console.log("///", orders);
   return (
     <div className="bg-gray-950 h-screen">
       <div className="flex flex-col">
         {/* liste */}
         <section className="w-full ">
           <div className="max-h-[70vh] border border-gray-700">
-            <table className="table-auto text-left  w-full ">
+            <table className="table-auto text-left  w-full">
               <thead className="bg-gray-950 text-primary uppercase text-sm sticky top-0 z-20">
-                <tr className="border-b border-primary">
+                <tr className=" border-b border-primary ">
                   <th className="px-6 py-3 font-bold">#</th>
-                  <th className="px-6 py-3 font-bold">Date</th>
-                  <th className="px-6 py-3 font-bold">Client</th>
-                  <th className="px-6 py-3 font-bold">Total</th>
-                  <th className="px-6 py-3 font-bold">Resp</th>
-                  <th className="px-6 py-3 font-bold">Status</th>
-                  {/* <th className="px-6 py-3 font-">Cree le</th> */}
+                  <th className="px-6 py-3 font-bold">Nom</th>
+                  <th className="px-6 py-3 font-bold">prix</th>
+                  <th className="px-6 py-3 font-bold">description</th>
+                  <th className="px-6 py-3 font-bold">categorie</th>
+                  {/* <th className="px-6 py-3 font-bold">stock</th> */}
+                  <th className="px-6 py-3 font-bold">suppliers</th>
+                  <th className="px-6 py-3 font-bold">cree le</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-700 bg-white/5  ">
                 {loading ? (
                   <tr>
                     <td
-                      colSpan="6"
+                      colSpan="7"
                       className="px-6 py-4 text-center text-gray-400"
                     >
                       Chargement...
@@ -47,40 +48,39 @@ function OrderList() {
                 ) : error ? (
                   <tr>
                     <td
-                      colSpan="6"
+                      colSpan="7"
                       className="px-6 py-4 text-center text-red-400"
                     >
                       {error}
                     </td>
                   </tr>
-                ) : orders.length === 0 ? (
+                ) : products.length === 0 ? (
                   <tr>
                     <td
-                      colSpan="6"
+                      colSpan="7"
                       className="px-6 py-4 text-center text-gray-500"
                     >
                       Aucune commande trouvee.
                     </td>
                   </tr>
                 ) : (
-                  orders.map((order, index) => (
+                  products.map((product, index) => (
                     <tr
                       className="hover:bg-gray-800 transition-colors bg-secondary border-b border-primary text-white"
-                      key={order.id}
+                      key={product.id}
                     >
-                      <td className="px-6 py-4 text-white">#{index}</td>
+                      <td className="px-6 py-4 ">#{index}</td>
+                      <td className="px-6 py-4 ">{product.name}</td>
                       <td className="px-6 py-4 ">
-                        {formatDate(order.created_at)}
+                        {formatCurrency(product.price)}
                       </td>
-                      <td className="px-6 py-4 ">{order.client_name}</td>
-                      <td className="px-6 py-4 ">
-                        {formatCurrency(order.total_amount)}
+                      <td className="px-6 py-4 ">{product.description}</td>
+                      <td className="px-6 py-4 ">{product.category_name}</td>
+                      {/* <td className="px-6 py-4 ">{product.stock}</td> */}
+                      <td className="px-6 py-4 ">{product.suppliers_name}</td>
+                      <td className="px-6 py-4">
+                        {formatDate(product.created_at)}
                       </td>
-                      <td className="px-6 py-4 ">{order.user_name}</td>
-                      <td className="px-6 py-4 ">
-                        <OrderStatus status={order.status} variant="solid" />
-                      </td>
-                      {/* <td className="px-6 py-4">{order.created_at}</td> */}
                     </tr>
                   ))
                 )}
@@ -93,4 +93,4 @@ function OrderList() {
   );
 }
 
-export default OrderList;
+export default ProductsList;

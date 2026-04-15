@@ -17,11 +17,3 @@ export const productService = {
   update: (id, data) => api.put(`${BASE}/products/${id}/`, data),
   remove: (id) => api.delete(`${BASE}/products/${id}/`),
 };
-
-export const supplierService = {
-  getAll: () => api.get(`${BASE}/suppliers/`),
-  getById: (id) => api.get(`${BASE}/suppliers/${id}/`),
-  create: (data) => api.post(`${BASE}/suppliers/`, data),
-  update: (id, data) => api.put(`${BASE}/suppliers/${id}/`, data),
-  remove: (id) => api.delete(`${BASE}/suppliers/${id}/`),
-};

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../components/NavBar";
 import { orderService } from "../api/orderService";
 import { Trash2 } from "lucide-react";
 import { productService } from "../api/categorieService";
@@ -130,9 +129,6 @@ function OrderCreater() {
 
   return (
     <div className="bg-gray-950 h-screen flex flex-col">
-      {/* NavBar (taille automatique) */}
-      <NavBar />
-
       {/* CONTENU qui prend le reste */}
       <div className="flex-1 px-4 py-4 flex flex-col gap-4   overflow-auto">
         {/* Actions */}

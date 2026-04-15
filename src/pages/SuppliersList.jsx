@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { orderService } from "../api/orderService";
-import OrderStatus from "../components/layouts/OrderStatus";
-import { formatCurrency, formatDate } from "../utils/format";
-function OrderList() {
-  const [orders, setOrders] = useState([]);
+import { supplierService } from "../api/supplierService";
+
+function SuppliersList() {
+  const [suppliers, setSuppliers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    orderService
+  const supplierservice = () => {
+    supplierService
       .getAll()
-      .then((res) => setOrders(res.data))
+      .then((res) => setSuppliers(res.data))
       .catch(() => setError("Erreur de chargement"))
       .finally(() => setLoading(false));
-  }, []);
+  };
+  useEffect(supplierservice, []);
+  console.log("///", suppliers);
 
-  console.log("///", orders);
   return (
     <div className="bg-gray-950 h-screen">
       <div className="flex flex-col">
@@ -26,12 +25,11 @@ function OrderList() {
               <thead className="bg-gray-950 text-primary uppercase text-sm sticky top-0 z-20">
                 <tr className="border-b border-primary">
                   <th className="px-6 py-3 font-bold">#</th>
-                  <th className="px-6 py-3 font-bold">Date</th>
-                  <th className="px-6 py-3 font-bold">Client</th>
-                  <th className="px-6 py-3 font-bold">Total</th>
-                  <th className="px-6 py-3 font-bold">Resp</th>
-                  <th className="px-6 py-3 font-bold">Status</th>
-                  {/* <th className="px-6 py-3 font-">Cree le</th> */}
+                  <th className="px-6 py-3 font-bold">Nom</th>
+                  <th className="px-6 py-3 font-bold">responsable</th>
+                  <th className="px-6 py-3 font-bold">email</th>
+                  <th className="px-6 py-3 font-bold">adresse</th>
+                  <th className="px-6 py-3 font-bold">tel</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-700 bg-white/5  ">
@@ -53,7 +51,7 @@ function OrderList() {
                       {error}
                     </td>
                   </tr>
-                ) : orders.length === 0 ? (
+                ) : suppliers.length === 0 ? (
                   <tr>
                     <td
                       colSpan="6"
@@ -63,24 +61,17 @@ function OrderList() {
                     </td>
                   </tr>
                 ) : (
-                  orders.map((order, index) => (
+                  suppliers.map((supplier, index) => (
                     <tr
                       className="hover:bg-gray-800 transition-colors bg-secondary border-b border-primary text-white"
-                      key={order.id}
+                      key={supplier.id}
                     >
                       <td className="px-6 py-4 text-white">#{index}</td>
-                      <td className="px-6 py-4 ">
-                        {formatDate(order.created_at)}
-                      </td>
-                      <td className="px-6 py-4 ">{order.client_name}</td>
-                      <td className="px-6 py-4 ">
-                        {formatCurrency(order.total_amount)}
-                      </td>
-                      <td className="px-6 py-4 ">{order.user_name}</td>
-                      <td className="px-6 py-4 ">
-                        <OrderStatus status={order.status} variant="solid" />
-                      </td>
-                      {/* <td className="px-6 py-4">{order.created_at}</td> */}
+                      <td className="px-6 py-4 ">{supplier.name}</td>
+                      <td className="px-6 py-4 ">{supplier.contact_name}</td>
+                      <td className="px-6 py-4 ">{supplier.email}</td>
+                      <td className="px-6 py-4 ">{supplier.phone_number}</td>
+                      <td className="px-6 py-4 ">{supplier.address}</td>
                     </tr>
                   ))
                 )}
@@ -93,4 +84,4 @@ function OrderList() {
   );
 }
 
-export default OrderList;
+export default SuppliersList;
