@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { orderService } from "../api/orderService";
-import OrderStatus from "../components/layouts/OrderStatus";
-import { formatCurrency, formatDate } from "../utils/format";
+import { orderService } from "../../api/orderService";
+import OrderStatus from "../../components/layouts/OrderStatus";
+import { formatCurrency, formatDate } from "../../utils/format";
 function OrderList() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,6 +19,12 @@ function OrderList() {
   return (
     <div className="bg-gray-950 h-screen">
       <div className="flex flex-col">
+        {/* <div>
+          <h1 className="text-2xl font-bold text-white">Categories</h1>
+          <p className="text-sm text-gray-400">
+            Liste des commandes disponibles.
+          </p>
+        </div> */}
         {/* liste */}
         <section className="w-full ">
           <div className="max-h-[70vh] border border-gray-700">

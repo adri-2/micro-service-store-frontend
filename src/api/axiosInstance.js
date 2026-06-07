@@ -1,5 +1,7 @@
 import axios from "axios";
 import { getTokens, setAccessToken, clearTokens } from "../store/authStore";
+// import { resolveApiBaseUrl } from "./baseUrl";
+
 const API_URL = import.meta.env.VITE_ACCOUNTS_BASE_URL;
 const api = axios.create({
   baseURL: API_URL,

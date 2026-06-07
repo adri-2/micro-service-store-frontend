@@ -1,4 +1,5 @@
 import api from "./axiosInstance";
+// import { resolveApiBaseUrl } from "./baseUrl";
 
 const BASE = import.meta.env.VITE_PRODUCTS_BASE_URL;
 

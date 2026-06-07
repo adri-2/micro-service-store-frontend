@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { orderService } from "../api/orderService";
+import { orderService } from "../../api/orderService";
 import { Trash2 } from "lucide-react";
-import { productService } from "../api/categorieService";
-import { customerService } from "../api/customerService";
-import { useAuthStore } from "../store/authStore";
+import { productService } from "../../api/categorieService";
+import { customerService } from "../../api/customerService";
+import { useAuthStore } from "../../store/authStore";
 
 function OrderCreater() {
   const [products, setProducts] = useState([]);

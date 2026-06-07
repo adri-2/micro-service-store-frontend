@@ -23,7 +23,9 @@ function NavBar() {
   const createRouteBySection = {
     orders: "/order/new",
     products: "/product/new",
-    categories: null,
+    customers: "/customers/new",
+    suppliers: "/suppliers/new",
+    categories: "/categories/new",
   };
 
   const currentSection = Object.keys(createRouteBySection).find((section) =>
@@ -62,18 +64,18 @@ function NavBar() {
           </NavLink>
         </nav>
         <div className="mt-4">
-          {/* {createLink ? ( */}
-          <NavLink className="btn-secondary" to={createLink}>
-            Nouveau
-          </NavLink>
-          {/* // ) : (
+          {createLink ? (
+            <NavLink className="btn-secondary" to={createLink}>
+              Nouveau
+            </NavLink>
+          ) : (
             <button
               className="btn-secondary opacity-60 cursor-not-allowed"
               disabled
             >
               Nouveau
             </button>
-          )} */}
+          )}
         </div>
       </div>
 

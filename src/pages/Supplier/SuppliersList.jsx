@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { supplierService } from "../api/supplierService";
+import { supplierService } from "../../api/supplierService";
+import { Link } from "react-router-dom";
 
 function SuppliersList() {
   const [suppliers, setSuppliers] = useState([]);
@@ -18,6 +19,18 @@ function SuppliersList() {
   return (
     <div className="bg-gray-950 h-screen">
       <div className="flex flex-col">
+        {/* <div className="flex items-center justify-between px-4 py-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white">Fournisseurs</h1>
+            <p className="text-sm text-gray-400">
+              Liste des fournisseurs disponibles.
+            </p>
+          </div>
+
+          <Link to="/suppliers/new" className="btn-primary">
+            Nouveau fournisseur
+          </Link>
+        </div> */}
         {/* liste */}
         <section className="w-full ">
           <div className="max-h-[70vh] border border-gray-700">
@@ -57,7 +70,7 @@ function SuppliersList() {
                       colSpan="6"
                       className="px-6 py-4 text-center text-gray-500"
                     >
-                      Aucune commande trouvee.
+                      Aucun fournisseur trouvé.
                     </td>
                   </tr>
                 ) : (
@@ -66,12 +79,12 @@ function SuppliersList() {
                       className="hover:bg-gray-800 transition-colors bg-secondary border-b border-primary text-white"
                       key={supplier.id}
                     >
-                      <td className="px-6 py-4 text-white">#{index}</td>
+                      <td className="px-6 py-4 text-white">#{index + 1}</td>
                       <td className="px-6 py-4 ">{supplier.name}</td>
                       <td className="px-6 py-4 ">{supplier.contact_name}</td>
                       <td className="px-6 py-4 ">{supplier.email}</td>
-                      <td className="px-6 py-4 ">{supplier.phone_number}</td>
                       <td className="px-6 py-4 ">{supplier.address}</td>
+                      <td className="px-6 py-4 ">{supplier.phone_number}</td>
                     </tr>
                   ))
                 )}

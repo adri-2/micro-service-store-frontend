@@ -1,24 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { productService } from "../api/categorieService";
-import { formatCurrency, formatDate } from "../utils/format";
-
-function ProductsList() {
-  const [products, setProducts] = useState([]);
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { categorieService } from "../../api/categorieService";
+export default function CategoriesPage() {
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    productService
+    categorieService
       .getAll()
-      .then((res) => setProducts(res.data))
+      .then((res) => setCategories(res.data))
       .catch(() => setError("Erreur de chargement"))
       .finally(() => setLoading(false));
   }, []);
-  console.log("//", products);
 
   return (
     <div className="bg-gray-950 h-screen">
       <div className="flex flex-col">
+        <div className="flex items-center justify-between px-4 py-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white">Categories</h1>
+            <p className="text-sm text-gray-400">
+              Liste des catégories disponibles.
+            </p>
+          </div>
+
+          {/* <Link to="/categories/new" className="btn-primary">
+            Nouvelle catégorie
+          </Link> */}
+        </div>
+
         {/* liste */}
         <section className="w-full ">
           <div className="max-h-[70vh] border border-gray-700">
@@ -27,19 +38,16 @@ function ProductsList() {
                 <tr className=" border-b border-primary ">
                   <th className="px-6 py-3 font-bold">#</th>
                   <th className="px-6 py-3 font-bold">Nom</th>
-                  <th className="px-6 py-3 font-bold">prix</th>
                   <th className="px-6 py-3 font-bold">description</th>
-                  <th className="px-6 py-3 font-bold">categorie</th>
-                  {/* <th className="px-6 py-3 font-bold">stock</th> */}
-                  <th className="px-6 py-3 font-bold">suppliers</th>
-                  <th className="px-6 py-3 font-bold">cree le</th>
+
+                  {/* <th className="px-6 py-3 font-bold">titre</th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-700 bg-white/5  ">
                 {loading ? (
                   <tr>
                     <td
-                      colSpan="7"
+                      colSpan="3"
                       className="px-6 py-4 text-center text-gray-400"
                     >
                       Chargement...
@@ -48,39 +56,21 @@ function ProductsList() {
                 ) : error ? (
                   <tr>
                     <td
-                      colSpan="7"
+                      colSpan="3"
                       className="px-6 py-4 text-center text-red-400"
                     >
                       {error}
                     </td>
                   </tr>
-                ) : products.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan="7"
-                      className="px-6 py-4 text-center text-gray-500"
-                    >
-                      Aucune commande trouvee.
-                    </td>
-                  </tr>
                 ) : (
-                  products.map((product, index) => (
+                  categories.map((cat, index) => (
                     <tr
                       className="hover:bg-gray-800 transition-colors bg-secondary border-b border-primary text-white"
-                      key={product.id}
+                      key={cat.id}
                     >
                       <td className="px-6 py-4 ">#{index}</td>
-                      <td className="px-6 py-4 ">{product.name}</td>
-                      <td className="px-6 py-4 ">
-                        {formatCurrency(product.price)}
-                      </td>
-                      <td className="px-6 py-4 ">{product.description}</td>
-                      <td className="px-6 py-4 ">{product.category_name}</td>
-                      {/* <td className="px-6 py-4 ">{product.stock}</td> */}
-                      <td className="px-6 py-4 ">{product.suppliers_name}</td>
-                      <td className="px-6 py-4">
-                        {formatDate(product.created_at)}
-                      </td>
+                      <td className="px-6 py-4 ">{cat.name}</td>
+                      <td className="px-6 py-4 ">{cat.description}</td>
                     </tr>
                   ))
                 )}
@@ -92,5 +82,3 @@ function ProductsList() {
     </div>
   );
 }
-
-export default ProductsList;
