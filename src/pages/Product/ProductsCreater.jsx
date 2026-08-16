@@ -71,14 +71,16 @@ function ProductsCreater() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 px-4 py-8 text-white">
+    <div className="space-y-6">
       <div className="mx-auto max-w-3xl">
         <div className="mb-6 flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-primary">
+            <p className="text-sm uppercase tracking-[0.3em] text-slate-500">
               Produits
             </p>
-            <h1 className="mt-2 text-3xl font-bold">Créer un produit</h1>
+            <h1 className="mt-2 text-3xl font-semibold text-slate-900">
+              Créer un produit
+            </h1>
           </div>
 
           <button
@@ -92,11 +94,11 @@ function ProductsCreater() {
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-2xl border border-gray-800 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur"
+          className="surface p-6"
         >
           <div className="grid gap-6 md:grid-cols-2">
             <div className="flex flex-col gap-2 md:col-span-2">
-              <label htmlFor="name" className="text-sm font-semibold">
+              <label htmlFor="name" className="text-sm font-medium text-slate-700">
                 Nom
               </label>
               <input
@@ -106,12 +108,12 @@ function ProductsCreater() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="price" className="text-sm font-semibold">
+              <label htmlFor="price" className="text-sm font-medium text-slate-700">
                 Prix
               </label>
               <input
@@ -123,12 +125,12 @@ function ProductsCreater() {
                 value={formData.price}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="stock" className="text-sm font-semibold">
+              <label htmlFor="stock" className="text-sm font-medium text-slate-700">
                 Stock
               </label>
               <input
@@ -139,12 +141,12 @@ function ProductsCreater() {
                 value={formData.stock}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="category" className="text-sm font-semibold">
+              <label htmlFor="category" className="text-sm font-medium text-slate-700">
                 Catégorie
               </label>
               <select
@@ -153,7 +155,7 @@ function ProductsCreater() {
                 value={formData.category}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               >
                 <option value="">Choisir une catégorie</option>
                 {categories.map((cat) => (
@@ -165,7 +167,7 @@ function ProductsCreater() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="suppliers" className="text-sm font-semibold">
+              <label htmlFor="suppliers" className="text-sm font-medium text-slate-700">
                 Fournisseur
               </label>
               <select
@@ -174,7 +176,7 @@ function ProductsCreater() {
                 value={formData.suppliers}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               >
                 <option value="">Choisir un fournisseur</option>
                 {suppliers.map((supplier) => (
@@ -186,7 +188,10 @@ function ProductsCreater() {
             </div>
 
             <div className="flex flex-col gap-2 md:col-span-2">
-              <label htmlFor="description" className="text-sm font-semibold">
+              <label
+                htmlFor="description"
+                className="text-sm font-medium text-slate-700"
+              >
                 Description
               </label>
               <textarea
@@ -196,13 +201,13 @@ function ProductsCreater() {
                 value={formData.description}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field min-h-32"
               />
             </div>
           </div>
 
           {error ? (
-            <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+            <p className="mt-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
               {error}
             </p>
           ) : null}

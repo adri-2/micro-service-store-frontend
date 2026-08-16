@@ -18,41 +18,43 @@ function ProductsList() {
   console.log("//", products);
 
   return (
-    <div className="bg-gray-950 h-screen">
-      <div className="flex flex-col">
-        {/* <div className="flex items-center justify-between px-4 py-4">
-          <div>
-            <h1 className="text-2xl font-bold text-white">Produits</h1>
-            <p className="text-sm text-gray-400">
-              Liste des produits disponibles.
-            </p>
-          </div>
-          <Link to="/product/new" className="btn-primary">
-            Nouveau produit
-          </Link>
-        </div> */}
-        {/* liste */}
-        <section className="w-full ">
-          <div className="max-h-[70vh] border border-gray-700">
-            <table className="table-auto text-left  w-full">
-              <thead className="bg-gray-950 text-primary uppercase text-sm sticky top-0 z-20">
-                <tr className=" border-b border-primary ">
-                  <th className="px-6 py-3 font-bold">#</th>
-                  <th className="px-6 py-3 font-bold">Nom</th>
-                  <th className="px-6 py-3 font-bold">prix</th>
-                  <th className="px-6 py-3 font-bold">description</th>
-                  <th className="px-6 py-3 font-bold">categorie</th>
-                  {/* <th className="px-6 py-3 font-bold">stock</th> */}
-                  <th className="px-6 py-3 font-bold">suppliers</th>
-                  <th className="px-6 py-3 font-bold">cree le</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-700 bg-white/5  ">
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm uppercase tracking-[0.3em] text-slate-500">
+            Catalogue
+          </p>
+          <h1 className="mt-2 text-3xl font-semibold text-slate-900">
+            Produits
+          </h1>
+          <p className="mt-2 text-sm text-slate-500">
+            Liste des produits disponibles.
+          </p>
+        </div>
+        <Link to="/product/new" className="btn-primary">
+          Nouveau produit
+        </Link>
+      </div>
+
+      <section className="table-shell">
+        <table className="table-auto w-full text-left">
+          <thead className="table-head">
+            <tr className="border-b border-slate-200">
+              <th className="px-6 py-3 font-semibold">#</th>
+              <th className="px-6 py-3 font-semibold">Nom</th>
+              <th className="px-6 py-3 font-semibold">Prix</th>
+              <th className="px-6 py-3 font-semibold">Description</th>
+              <th className="px-6 py-3 font-semibold">Catégorie</th>
+              <th className="px-6 py-3 font-semibold">Fournisseur</th>
+              <th className="px-6 py-3 font-semibold">Créé le</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200 bg-white">
                 {loading ? (
                   <tr>
                     <td
                       colSpan="7"
-                      className="px-6 py-4 text-center text-gray-400"
+                      className="px-6 py-6 text-center text-slate-500"
                     >
                       Chargement...
                     </td>
@@ -61,7 +63,7 @@ function ProductsList() {
                   <tr>
                     <td
                       colSpan="7"
-                      className="px-6 py-4 text-center text-red-400"
+                      className="px-6 py-6 text-center text-rose-600"
                     >
                       {error}
                     </td>
@@ -70,37 +72,32 @@ function ProductsList() {
                   <tr>
                     <td
                       colSpan="7"
-                      className="px-6 py-4 text-center text-gray-500"
+                      className="px-6 py-6 text-center text-slate-500"
                     >
                       Aucun produit trouvé.
                     </td>
                   </tr>
                 ) : (
                   products.map((product, index) => (
-                    <tr
-                      className="hover:bg-gray-800 transition-colors bg-secondary border-b border-primary text-white"
-                      key={product.id}
-                    >
-                      <td className="px-6 py-4 ">#{index + 1}</td>
-                      <td className="px-6 py-4 ">{product.name}</td>
-                      <td className="px-6 py-4 ">
+                    <tr className="transition-colors hover:bg-slate-50" key={product.id}>
+                      <td className="px-6 py-4 text-slate-600">#{index + 1}</td>
+                      <td className="px-6 py-4 text-slate-900">{product.name}</td>
+                      <td className="px-6 py-4 text-slate-700">
                         {formatCurrency(product.price)}
                       </td>
-                      <td className="px-6 py-4 ">{product.description}</td>
-                      <td className="px-6 py-4 ">{product.category_name}</td>
+                      <td className="px-6 py-4 text-slate-700">{product.description}</td>
+                      <td className="px-6 py-4 text-slate-700">{product.category_name}</td>
                       {/* <td className="px-6 py-4 ">{product.stock}</td> */}
-                      <td className="px-6 py-4 ">{product.suppliers_name}</td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 text-slate-700">{product.stock}</td>
+                      <td className="px-6 py-4 text-slate-700">
                         {formatDate(product.created_at)}
                       </td>
                     </tr>
                   ))
                 )}
-              </tbody>
-            </table>
-          </div>
+          </tbody>
+        </table>
         </section>
-      </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import ProductsList from "../pages/Product/ProductsList";
 import ProductsCreater from "../pages/Product/ProductsCreater";
 import OrderCreater from "../pages/Order/OrderCreater";
 import MainLayout from "../components/layouts/MainLayout";
-
+import Dashboard from "../pages/Dashboard";
 import CustomerList from "../pages/Customer/CustomerList";
 import CustomerCreater from "../pages/Customer/CustomerCreater";
 import SuppliersList from "../pages/Supplier/SuppliersList";
@@ -36,7 +36,8 @@ export default function AppRouter() {
         <Route path="/customers/new" element={<CustomerCreater />} />
         <Route path="/suppliers" element={<SuppliersList />} />
         <Route path="/suppliers/new" element={<SuppliersCreater />} />
-        <Route path="/" element={<Navigate to="/orders" replace />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Route>
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>

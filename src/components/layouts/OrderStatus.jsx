@@ -20,11 +20,11 @@ const statusConfig = {
 };
 
 function OrderStatus({ status }) {
-  const config = statusConfig[status] || statusConfig["draft"];
+  const config = statusConfig[status] || statusConfig.Draft;
 
   return (
     <span
-      className={`px-3 py-1 rounded-full text-sm font-medium ${config.className}`}
+      className={`inline-flex rounded-full px-3 py-1 text-sm font-medium ${config.className}`}
     >
       {config.label}
     </span>

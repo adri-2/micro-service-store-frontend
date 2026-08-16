@@ -48,14 +48,16 @@ function CustomerCreater() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 px-4 py-8 text-white">
+    <div className="space-y-6">
       <div className="mx-auto max-w-3xl">
         <div className="mb-6 flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-primary">
+            <p className="text-sm uppercase tracking-[0.3em] text-slate-500">
               Clients
             </p>
-            <h1 className="mt-2 text-3xl font-bold">Créer un client</h1>
+            <h1 className="mt-2 text-3xl font-semibold text-slate-900">
+              Créer un client
+            </h1>
           </div>
 
           <button
@@ -69,11 +71,11 @@ function CustomerCreater() {
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-2xl border border-gray-800 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur"
+          className="surface p-6"
         >
           <div className="grid gap-6 md:grid-cols-2">
             <div className="flex flex-col gap-2">
-              <label htmlFor="first_name" className="text-sm font-semibold">
+              <label htmlFor="first_name" className="text-sm font-medium text-slate-700">
                 Prénom
               </label>
               <input
@@ -83,12 +85,12 @@ function CustomerCreater() {
                 value={formData.first_name}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="last_name" className="text-sm font-semibold">
+              <label htmlFor="last_name" className="text-sm font-medium text-slate-700">
                 Nom
               </label>
               <input
@@ -98,12 +100,12 @@ function CustomerCreater() {
                 value={formData.last_name}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-semibold">
+              <label htmlFor="email" className="text-sm font-medium text-slate-700">
                 Email
               </label>
               <input
@@ -113,12 +115,12 @@ function CustomerCreater() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="phone_number" className="text-sm font-semibold">
+              <label htmlFor="phone_number" className="text-sm font-medium text-slate-700">
                 Téléphone
               </label>
               <input
@@ -128,12 +130,12 @@ function CustomerCreater() {
                 value={formData.phone_number}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field"
               />
             </div>
 
             <div className="flex flex-col gap-2 md:col-span-2">
-              <label htmlFor="address" className="text-sm font-semibold">
+              <label htmlFor="address" className="text-sm font-medium text-slate-700">
                 Adresse
               </label>
               <textarea
@@ -143,13 +145,13 @@ function CustomerCreater() {
                 value={formData.address}
                 onChange={handleChange}
                 required
-                className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 outline-none transition focus:border-primary"
+                className="input-field min-h-32"
               />
             </div>
           </div>
 
           {error ? (
-            <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+            <p className="mt-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
               {error}
             </p>
           ) : null}

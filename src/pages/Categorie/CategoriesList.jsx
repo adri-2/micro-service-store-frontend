@@ -15,40 +15,34 @@ export default function CategoriesPage() {
   }, []);
 
   return (
-    <div className="bg-gray-950 h-screen">
-      <div className="flex flex-col">
-        <div className="flex items-center justify-between px-4 py-4">
-          <div>
-            <h1 className="text-2xl font-bold text-white">Categories</h1>
-            <p className="text-sm text-gray-400">
-              Liste des catégories disponibles.
-            </p>
-          </div>
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm uppercase tracking-[0.3em] text-slate-500">
+          Catalogue
+        </p>
+        <h1 className="mt-2 text-3xl font-semibold text-slate-900">
+          Catégories
+        </h1>
+        <p className="mt-2 text-sm text-slate-500">
+          Liste des catégories disponibles.
+        </p>
+      </div>
 
-          {/* <Link to="/categories/new" className="btn-primary">
-            Nouvelle catégorie
-          </Link> */}
-        </div>
-
-        {/* liste */}
-        <section className="w-full ">
-          <div className="max-h-[70vh] border border-gray-700">
-            <table className="table-auto text-left  w-full">
-              <thead className="bg-gray-950 text-primary uppercase text-sm sticky top-0 z-20">
-                <tr className=" border-b border-primary ">
-                  <th className="px-6 py-3 font-bold">#</th>
-                  <th className="px-6 py-3 font-bold">Nom</th>
-                  <th className="px-6 py-3 font-bold">description</th>
-
-                  {/* <th className="px-6 py-3 font-bold">titre</th> */}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-700 bg-white/5  ">
+      <section className="table-shell">
+        <table className="table-auto w-full text-left">
+          <thead className="table-head">
+            <tr className="border-b border-slate-200">
+              <th className="px-6 py-3 font-semibold">#</th>
+              <th className="px-6 py-3 font-semibold">Nom</th>
+              <th className="px-6 py-3 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200 bg-white">
                 {loading ? (
                   <tr>
                     <td
                       colSpan="3"
-                      className="px-6 py-4 text-center text-gray-400"
+                      className="px-6 py-6 text-center text-slate-500"
                     >
                       Chargement...
                     </td>
@@ -57,28 +51,23 @@ export default function CategoriesPage() {
                   <tr>
                     <td
                       colSpan="3"
-                      className="px-6 py-4 text-center text-red-400"
+                      className="px-6 py-6 text-center text-rose-600"
                     >
                       {error}
                     </td>
                   </tr>
                 ) : (
                   categories.map((cat, index) => (
-                    <tr
-                      className="hover:bg-gray-800 transition-colors bg-secondary border-b border-primary text-white"
-                      key={cat.id}
-                    >
-                      <td className="px-6 py-4 ">#{index}</td>
-                      <td className="px-6 py-4 ">{cat.name}</td>
-                      <td className="px-6 py-4 ">{cat.description}</td>
+                    <tr className="transition-colors hover:bg-slate-50" key={cat.id}>
+                      <td className="px-6 py-4 text-slate-600">#{index + 1}</td>
+                      <td className="px-6 py-4 text-slate-900">{cat.name}</td>
+                      <td className="px-6 py-4 text-slate-700">{cat.description}</td>
                     </tr>
                   ))
                 )}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 }

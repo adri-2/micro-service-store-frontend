@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { TextField, Button, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
@@ -12,60 +11,65 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const ok = await login(email, password);
-    if (ok) navigate("/categories");
+    if (ok) navigate("/dashboard");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-400 to-pink-300 px-4">
-      {/* Card */}
-      <div className="w-full max-w-md bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl p-8">
-        {/* Title */}
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Connexion
-        </h2>
+    <div className="app-shell flex items-center justify-center px-4 py-8">
+      <div className="surface w-full max-w-md p-8">
+        <div className="mb-8 text-center">
+          <p className="text-sm uppercase tracking-[0.3em] text-slate-500">
+            Bienvenue
+          </p>
+          <h1 className="mt-3 text-3xl font-semibold text-slate-900">
+            Connexion
+          </h1>
+          <p className="mt-2 text-sm text-slate-500">
+            Accédez à votre tableau de bord en quelques secondes.
+          </p>
+        </div>
 
-        {/* Error */}
-        {error && (
-          <p className="text-red-500 text-sm text-center mb-4">{error}</p>
-        )}
+        {error ? (
+          <p className="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+            {error}
+          </p>
+        ) : null}
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-5 flex flex-col gap-4">
-          <TextField
-            fullWidth
-            id="email"
-            label="Email"
-            variant="outlined"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <label htmlFor="email" className="text-sm font-medium text-slate-700">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input-field"
+              autoComplete="email"
+            />
+          </div>
 
-          <TextField
-            fullWidth
-            id="password"
-            label="Mot de passe"
-            variant="outlined"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="space-y-2">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium text-slate-700"
+            >
+              Mot de passe
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input-field"
+              autoComplete="current-password"
+            />
+          </div>
 
-          <Button
-            fullWidth
-            disabled={loading}
-            type="submit"
-            variant="contained"
-            sx={{
-              py: 1.5,
-              borderRadius: "10px",
-              fontWeight: "bold",
-            }}
-            startIcon={
-              loading && <CircularProgress size={20} color="inherit" />
-            }
-          >
+          <button type="submit" className="btn-primary w-full" disabled={loading}>
             {loading ? "Connexion..." : "Se connecter"}
-          </Button>
+          </button>
         </form>
       </div>
     </div>
