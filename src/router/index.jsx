@@ -13,6 +13,7 @@ import CustomerList from "../pages/Customer/CustomerList";
 import CustomerCreater from "../pages/Customer/CustomerCreater";
 import SuppliersList from "../pages/Supplier/SuppliersList";
 import SuppliersCreater from "../pages/Supplier/SuppliersCreater";
+import OrderDetail from "../pages/Order/OrderDetail";
 // import Cust from "../pages/CustomerList";
 
 export default function AppRouter() {
@@ -27,6 +28,7 @@ export default function AppRouter() {
         }
       >
         <Route path="/orders" element={<OrderList />} />
+         <Route path={`/orders/:id`} element={<OrderDetail />} />
         <Route path="/order/new" element={<OrderCreater />} />
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/categories/new" element={<CategoriesCreater />} />
