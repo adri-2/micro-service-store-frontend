@@ -53,3 +53,8 @@ export const formatTime = (dateString) => {
     minute: "2-digit",
   });
 };
+
+export const formatId=(id)=>{
+  if (!id) return "..."
+  return `${id.slice(0,6)}...${id.slice(-4)}`
+}

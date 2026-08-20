@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { customerService } from "../../api/customerService";
-
+import {formatId} from "../../utils/format";
 function CustomerList() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -73,9 +73,9 @@ function CustomerList() {
                     </td>
                   </tr>
                 ) : (
-                  customers.map((customer, index) => (
+                  customers.map((customer) => (
                     <tr className="transition-colors hover:bg-slate-50" key={customer.id}>
-                      <td className="px-6 py-4 text-slate-600">#{index + 1}</td>
+                      <td className="px-6 py-4 text-slate-600">#{formatId(customer.id)}</td>
                       <td className="px-6 py-4 text-slate-900">{customer.first_name}</td>
                       <td className="px-6 py-4 text-slate-700">{customer.last_name}</td>
                       <td className="px-6 py-4 text-slate-700">{customer.email}</td>

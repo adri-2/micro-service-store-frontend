@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supplierService } from "../../api/supplierService";
 import { Link } from "react-router-dom";
-
+import { formatId} from "../../utils/format";
 function SuppliersList() {
   const [suppliers, setSuppliers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -76,9 +76,9 @@ function SuppliersList() {
                     </td>
                   </tr>
                 ) : (
-                  suppliers.map((supplier, index) => (
+                  suppliers.map((supplier) => (
                     <tr className="transition-colors hover:bg-slate-50" key={supplier.id}>
-                      <td className="px-6 py-4 text-slate-600">#{index + 1}</td>
+                      <td className="px-6 py-4 text-slate-600">#{formatId(supplier.id)}</td>
                       <td className="px-6 py-4 text-slate-900">{supplier.name}</td>
                       <td className="px-6 py-4 text-slate-700">{supplier.contact_name}</td>
                       <td className="px-6 py-4 text-slate-700">{supplier.email}</td>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { productService } from "../../api/categorieService";
-import { formatCurrency, formatDate } from "../../utils/format";
+import { formatCurrency, formatDate,formatId} from "../../utils/format";
 import { Link } from "react-router-dom";
 
 function ProductsList() {
@@ -45,7 +45,7 @@ function ProductsList() {
               <th className="px-6 py-3 font-semibold">Prix</th>
               <th className="px-6 py-3 font-semibold">Description</th>
               <th className="px-6 py-3 font-semibold">Catégorie</th>
-              <th className="px-6 py-3 font-semibold">Fournisseur</th>
+              <th className="px-6 py-3 font-semibold">Qte</th>
               <th className="px-6 py-3 font-semibold">Créé le</th>
             </tr>
           </thead>
@@ -78,15 +78,15 @@ function ProductsList() {
                     </td>
                   </tr>
                 ) : (
-                  products.map((product, index) => (
+                  products.map((product) => (
                     <tr className="transition-colors hover:bg-slate-50" key={product.id}>
-                      <td className="px-6 py-4 text-slate-600">#{index + 1}</td>
+                      <td className="px-6 py-4 text-slate-600">#{formatId(product.id)}</td>
                       <td className="px-6 py-4 text-slate-900">{product.name}</td>
                       <td className="px-6 py-4 text-slate-700">
                         {formatCurrency(product.price)}
                       </td>
                       <td className="px-6 py-4 text-slate-700">{product.description}</td>
-                      <td className="px-6 py-4 text-slate-700">{product.category_name}</td>
+                      <td className="px-6 py-4 text-slate-700">{product.reserved_stock}</td>
                       {/* <td className="px-6 py-4 ">{product.stock}</td> */}
                       <td className="px-6 py-4 text-slate-700">{product.stock}</td>
                       <td className="px-6 py-4 text-slate-700">

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { orderService } from "../../api/orderService";
 import { useParams, Link } from "react-router-dom";
 import OrderStatus from "../../components/layouts/OrderStatus";
-import { formatCurrency, formatDate } from "../../utils/format";
-
+import { formatCurrency, formatDate, formatId} from "../../utils/format";
+import { useNavigate } from "react-router-dom";
 export default function OrderDetail() {
+  const navigate = useNavigate()
   const { id } = useParams();
 
   const [order, setOrder] = useState(null);
@@ -19,6 +20,48 @@ export default function OrderDetail() {
       .finally(() => setLoading(false));
   }, [id]); 
   
+ const handleCancal= async ()=>{
+  try{
+    const res = await orderService.cancel(id)
+     setOrder(res.data)
+  } catch(error){
+          setError("Erreur de l'annulation",error)
+          console.log("Erreur de l'annulation",error.response?.data)
+  }
+ }
+  const handleConfirm = async ()=>{
+    try{
+      const res= await orderService.confirm(id)
+      setOrder(res.data)
+    }catch (error){
+      setError("Erreur de confirmatioon",error)
+       console.log("Erreur de confirmatioon",error.response?.data)
+    }
+  }
+ const handleDelete = async () => {
+  const confirmed = confirm(
+    `Voulez-vous vraiment supprimer #${id} ?`
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+    await orderService.remove(id);
+
+    alert(`Commande #${id} supprimée`);
+    navigate("/orders");
+
+  } catch (error) {
+    console.log(error);
+
+    setError(
+      error.response?.data?.detail ||
+      "Impossible de supprimer cette commande."
+    );
+  }
+};
   
 console.log("...............",order)
    if (loading) {
@@ -58,15 +101,16 @@ console.log("...............",order)
       </div>
     );
   }
-const items = order.items
+const items = order.items ?? []
+
   return (
     <div className="space-y-6">
 <div className="flex flex-wrap items-center justify-between gap-3">
         {/* Actions */}
         <div className="flex flex-wrap gap-2">
-          <button className="btn-secondary">Confirmer</button>
-          <button className="btn-secondary">Annuler</button>
-          <button className="btn-secondary">Archiver</button>
+          <button className="btn-secondary cursor-pointer" onClick={handleConfirm}>Confirmer</button>
+          <button className="btn-secondary cursor-pointer" onClick={handleCancal}>Annuler</button>
+          <button className="bg-red-600 btn-secondary text-blue-50 cursor-pointer" onClick={handleDelete}>Suprimer</button>
         </div>
         <div className="flex gap-2">
           <button className="btn-primary">Brouillon</button>
@@ -123,7 +167,7 @@ const items = order.items
               className="mt-1 truncate text-sm font-medium text-slate-900"
               title={order.id}
             >
-              #{order.id}
+              #{formatId(order.id)}
             </p>
           </div>
 
@@ -270,7 +314,7 @@ const items = order.items
         </div>
 
 
-         {items.lenght ===0 ?(
+         {items.length ===0 ?(
                   <div className="mt-5 rounded-xl border border-dashed border-slate-200 p-6 text-center">
            <p className="text-sm text-slate-500">
             Aucun article disponible.
@@ -299,7 +343,7 @@ const items = order.items
         {item.product_name}
       </td>
       <td  className="px-6 py-4 text-slate-600">
-        {item.unit_price}
+        {formatCurrency(item.unit_price)}
       </td>
       <td  className="px-6 py-4 text-slate-600"
       >

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { orderService } from "../../api/orderService";
 import OrderStatus from "../../components/layouts/OrderStatus";
-import { formatCurrency, formatDate } from "../../utils/format";
+import { formatCurrency, formatDate, formatId } from "../../utils/format";
 import { Link} from "react-router-dom";
 function OrderList() {
 
@@ -73,11 +73,11 @@ function OrderList() {
                     </td>
                   </tr>
                 ) : (
-                  orders.map((order, index) => (
+                  orders.map((order) => (
                     <tr className="transition-colors hover:bg-slate-50" key={order.id}>
                       <td className="px-6 py-4 text-slate-600">
 
-                        <Link to={`${order.id}`}>#{index + 1}</Link>
+                        <Link to={`${order.id}`}>#{formatId(order.id)}</Link>
                       </td>
                       <td className="px-6 py-4 text-slate-700">
                         {formatDate(order.created_at)}

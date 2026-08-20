@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { categorieService } from "../../api/categorieService";
+import {formatId} from "../../utils/format";
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,9 +58,9 @@ export default function CategoriesPage() {
                     </td>
                   </tr>
                 ) : (
-                  categories.map((cat, index) => (
+                  categories.map((cat) => (
                     <tr className="transition-colors hover:bg-slate-50" key={cat.id}>
-                      <td className="px-6 py-4 text-slate-600">#{index + 1}</td>
+                      <td className="px-6 py-4 text-slate-600">#{formatId(cat.id)}</td>
                       <td className="px-6 py-4 text-slate-900">{cat.name}</td>
                       <td className="px-6 py-4 text-slate-700">{cat.description}</td>
                     </tr>

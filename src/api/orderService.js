@@ -9,4 +9,6 @@ export const orderService = {
   create: (data) => api.post(`${BASE}/orders/`, data),
   update: (id, data) => api.put(`${BASE}/orders/${id}/`, data),
   remove: (id) => api.delete(`${BASE}/orders/${id}/`),
+  cancel: (id)=>api.post(`${BASE}/orders/${id}/cancel/`),
+  confirm: (id)=>api.post(`${BASE}/orders/${id}/confirm/`),
 };
