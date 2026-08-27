@@ -11,4 +11,5 @@ export const orderService = {
   remove: (id) => api.delete(`${BASE}/orders/${id}/`),
   cancel: (id)=>api.post(`${BASE}/orders/${id}/cancel/`),
   confirm: (id)=>api.post(`${BASE}/orders/${id}/confirm/`),
+  account:(id)=>api.post(`${BASE}/orders/${id}/account/`),
 };

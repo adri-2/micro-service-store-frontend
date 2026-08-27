@@ -20,7 +20,7 @@ export default function OrderDetail() {
       .finally(() => setLoading(false));
   }, [id]); 
   
- const handleCancal= async ()=>{
+ const handleCancel= async ()=>{
   try{
     const res = await orderService.cancel(id)
      setOrder(res.data)
@@ -34,8 +34,8 @@ export default function OrderDetail() {
       const res= await orderService.confirm(id)
       setOrder(res.data)
     }catch (error){
-      setError("Erreur de confirmatioon",error)
-       console.log("Erreur de confirmatioon",error.response?.data)
+      setError("Erreur de confirmation",error)
+       console.log("Erreur de confirmation",error.response?.data)
     }
   }
  const handleDelete = async () => {
@@ -62,6 +62,17 @@ export default function OrderDetail() {
     );
   }
 };
+
+
+  const handleAccount = async ()=>{
+    try{
+      const res= await orderService.account(id)
+      setOrder(res.data)
+    }catch (error){
+      setError("Erreur de comptabilisation",error)
+       console.log("Erreur de comptabilisation",error.response?.data)
+    }
+  }
   
 console.log("...............",order)
    if (loading) {
@@ -109,12 +120,12 @@ const items = order.items ?? []
         {/* Actions */}
         <div className="flex flex-wrap gap-2">
           <button className="btn-secondary cursor-pointer" onClick={handleConfirm}>Confirmer</button>
-          <button className="btn-secondary cursor-pointer" onClick={handleCancal}>Annuler</button>
+          <button className="btn-secondary cursor-pointer" onClick={handleCancel}>Annuler</button>
           <button className="bg-red-600 btn-secondary text-blue-50 cursor-pointer" onClick={handleDelete}>Suprimer</button>
         </div>
         <div className="flex gap-2">
           <button className="btn-primary">Brouillon</button>
-          <button className="btn-secondary">Comptabilisé</button>
+          <button className="btn-secondary" onClick={handleAccount}>Comptabilisé</button>
         </div>
       </div>
       {/* Header */}

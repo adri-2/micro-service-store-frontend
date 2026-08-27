@@ -17,6 +17,15 @@ const statusConfig = {
     label: "Brouillon",
     className: "bg-gray-100 text-gray-700",
   },
+  Accounted: {
+    label: "Comptabilisé",
+    className: "bg-blue-100 text-blue-800",
+  },
+  Archived: {
+    label: "Archivé",
+    className: "bg-gray-100 text-gray-700",
+  },
+
 };
 
 function OrderStatus({ status }) {
